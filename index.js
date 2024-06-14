@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
 import router from "./src/routes/index.js";
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(
 );
 app.use(cors());
 app.use(express.json());
+dotenv.config();
 app.use("/", router());
 
 // testing Api
@@ -21,10 +23,6 @@ app.use("/", router());
 app.get("/", async (req, res) => {
   res.status(200).send({ status: true, message: "Service is getting run" });
 });
-
-// routers
-
-// app.use("/", router());
 
 // PORT
 app.listen(3000, () => {
