@@ -3,7 +3,7 @@ import db from "../configs/db.js";
 import { Sequelize, DataTypes } from "sequelize";
 import product from "./product.js";
 import review from "./review.js";
-import auth from "./auth.js";
+import user from "./user.js";
 
 const sequelize = new Sequelize(db.DB, db.USER, db.PASSWORD, {
   host: db.HOST,
@@ -33,7 +33,7 @@ const dbConfig = {};
 dbConfig.Sequelize = Sequelize;
 dbConfig.sequelize = sequelize;
 
-dbConfig.auth = auth(sequelize, DataTypes);
+dbConfig.users = user(sequelize, DataTypes);
 dbConfig.products = product(sequelize, DataTypes);
 dbConfig.reviews = review(sequelize, DataTypes);
 

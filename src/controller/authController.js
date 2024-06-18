@@ -2,13 +2,13 @@ import db from "../models/index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-const Auth = db.auth;
+const User = db.users;
 
 const signUp = async (req, res) => {
   let { name, email, password, role } = req.body;
   try {
     let hashedPassword = await bcrypt.hash(password, 10);
-    const user = await Auth.create({
+    const user = await User.create({
       name,
       email,
       password: hashedPassword,
@@ -31,7 +31,7 @@ const signUp = async (req, res) => {
 const signIn = async (req, res) => {
   let { email, password } = req.body;
   try {
-    let user = await Auth.findOne({ where: { email: email } });
+    let user = await User.findOne({ where: { email: email } });
     let matchPassword = await bcrypt.compare(password, user.password);
 
     if (matchPassword) {

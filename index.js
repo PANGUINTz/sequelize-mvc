@@ -3,6 +3,10 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import router from "./src/routes/index.js";
+import passport from "passport";
+import session from "express-session";
+
+import "./src/utils/passport.js";
 
 const app = express();
 
@@ -16,6 +20,17 @@ app.use(
 app.use(cors());
 app.use(express.json());
 dotenv.config();
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET, // session secret
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/", router());
 
 // testing Api
