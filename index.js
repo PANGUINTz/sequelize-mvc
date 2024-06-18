@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import router from "./src/routes/index.js";
 import passport from "passport";
 import session from "express-session";
+import cookieParser from "cookie-parser";
 
 import "./src/utils/passport.js";
 
@@ -18,6 +19,7 @@ app.use(
   })
 );
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 dotenv.config();
 

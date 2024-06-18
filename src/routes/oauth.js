@@ -11,7 +11,7 @@ export default (router) => {
   router.get(
     "/google/callback",
     passport.authenticate("google", {
-      access_type: "offline",
+      failureRedirect: "your_website",
       scope: ["email", "profile"],
     }),
     OAuth.googleCallback
